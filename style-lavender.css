@@ -221,3 +221,12 @@ footer {
   color: var(--muted);
   padding: 0.25rem 0.5rem;
 }
+
+/* Bootstrap modal theming for lavender site */
+.modal-content {
+  background: var(--surface);
+  color: var(--text);
+}
+.modal-header, .modal-footer {
+  border-color: rgba(0,0,0,0.04);
+}

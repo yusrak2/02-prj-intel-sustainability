@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Intel Sustainability & Localization</title>
+  <!-- Bootstrap CSS (load first so our theme can override) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style-lavender.css">
 </head>
 <body>
@@ -113,6 +115,24 @@
   <footer>
     <p>&copy; 2025 Intel Sustainability Project | Designed by Yusra</p>
   </footer>
+
+  <!-- Learn More Modal (Bootstrap) -->
+  <div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="learnMoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="learnMoreModalLabel">Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Filled dynamically -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Combined script: i18n, manual language switcher, RTL toggle, and timeline interactivity -->
   <script>
@@ -313,8 +333,32 @@
           if (p) p.classList.toggle('hidden');
         });
       });
+
+      // Bootstrap modal: wire "Learn More" buttons to show modal with context
+      const learnButtons = document.querySelectorAll('.three-columns .col button');
+      const modalEl = document.getElementById('learnMoreModal');
+      const bsModal = modalEl ? new bootstrap.Modal(modalEl) : null;
+      const modalTitle = modalEl ? modalEl.querySelector('.modal-title') : null;
+      const modalBody = modalEl ? modalEl.querySelector('.modal-body') : null;
+      const details = {
+        'Innovation': 'Intel drives sustainable innovation with efficient technology. We invest in research to lower power consumption and increase compute efficiency.',
+        'Environment': 'Intel prioritizes environmental responsibility: energy efficiency, water reduction, and circular design are central to our strategy.',
+        'Community': 'Intel supports communities globally with programs for education, workforce development, and inclusive tech access.'
+      };
+      learnButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const col = e.target.closest('.col');
+          const title = col ? (col.querySelector('h2') ? col.querySelector('h2').textContent : 'Details') : 'Details';
+          if (modalTitle) modalTitle.textContent = title;
+          if (modalBody) modalBody.textContent = details[title] || '';
+          if (bsModal) bsModal.show();
+        });
+      });
     })();
   </script>
-
+</body>
+</script>
+  <!-- Bootstrap JS (bundle includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
