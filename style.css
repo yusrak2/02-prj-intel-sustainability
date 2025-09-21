@@ -1,18 +1,154 @@
-body{font-family:sans-serif;margin:0;line-height:1.6}
-.lang-toggle{text-align:center;padding:1em;background:#f0f0f0}
-.lang-toggle button{margin:0 .5em;padding:.5em 1em;border:none;border-radius:6px;cursor:pointer}
-.hero{text-align:center;padding:2em;background:#dce9f9}
-.hero h1{margin-bottom:.5em}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1em;padding:2em}
-.card{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.1);padding:1em;text-align:center}
-.card img{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:.5em}
-.card button{margin-top:.5em;padding:.5em 1em;border:none;background:#0071c5;color:#fff;border-radius:6px;cursor:pointer}
-.subscribe{text-align:center;padding:2em;background:#eef6ed}
-.subscribe form{display:flex;justify-content:center;gap:.5em;flex-wrap:wrap}
-.subscribe input{padding:.5em;width:250px;max-width:100%;border:1px solid #ccc;border-radius:6px}
-.subscribe button{padding:.5em 1em;background:#28a745;color:#fff;border:none;border-radius:6px;cursor:pointer}
-footer{text-align:center;padding:1em;background:#222;color:#fff}
-.rubric{padding:2em}
-.rubric table{width:100%;border-collapse:collapse}
-.rubric th,.rubric td{border:1px solid #ccc;padding:.5em;text-align:center}
-.rubric th{background:#f8f8f8}
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f4f4f4;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: #0071c5;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+header button {
+  background: white;
+  color: #0071c5;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+header button:hover {
+  background: #e0e0e0;
+}
+
+/* Three Columns */
+.three-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
+  background: #fff;
+}
+.col {
+  flex: 1 1 250px;
+  max-width: 300px;
+  margin: 1rem;
+  text-align: center;
+  background: #fdfdfd;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.col:hover {
+  transform: scale(1.05);
+}
+.col img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.col button {
+  background: #0071c5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.col button:hover {
+  background: #005b99;
+}
+
+/* Timeline */
+.timeline {
+  padding: 2rem;
+  background: #eef5fb;
+}
+.timeline h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Desktop: grid */
+.timeline-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.timeline-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.timeline-card:hover {
+  transform: translateY(-5px);
+}
+.timeline-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.timeline-card .hidden {
+  display: none;
+}
+
+/* Mobile: horizontal scroll */
+@media (max-width: 768px) {
+  .timeline-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+  .timeline-card {
+    min-width: 250px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Subscription */
+.subscribe {
+  background: #fff;
+  padding: 2rem;
+  text-align: center;
+}
+.subscribe form {
+  display: inline-block;
+  margin-top: 1rem;
+}
+.subscribe input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.subscribe button {
+  background: #0071c5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.subscribe button:hover {
+  background: #005b99;
+}
+
+/* Footer */
+footer {
+  background: #0071c5;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}

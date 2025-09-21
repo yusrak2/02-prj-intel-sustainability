@@ -1,113 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Intel Sustainability Timeline</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intel Sustainability & Localization</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Language Toggle -->
-  <div class="lang-toggle">
-    <button onclick="setLang('en')">English</button>
-    <button onclick="setLang('ar')">العربية</button>
-  </div>
-
-  <!-- Hero -->
-  <header class="hero">
-    <h1 data-en="Intel Sustainability Through the Years"
-        data-ar="الاستدامة عبر العصور">Intel Sustainability Through the Years</h1>
-    <p data-en="Exploring Intel's journey of innovation and sustainability."
-       data-ar="استكشاف رحلة إنتل في الابتكار والاستدامة.">
-       Exploring Intel's journey of innovation and sustainability.</p>
+  <!-- Header with RTL Toggle -->
+  <header>
+    <h1>Intel Sustainability & Localization Project</h1>
+    <button id="rtl-toggle">Toggle RTL</button>
   </header>
 
-  <!-- Timeline Grid -->
-  <main class="grid">
-    <div class="card">
-      <img src="1.jpg" alt="1968 – Intel Founded">
-      <p>1968 – Intel Founded</p>
-      <button data-en="Read More" data-ar="إقرأ أكثر">Read More</button>
+  <!-- Three Column Section -->
+  <section class="three-columns">
+    <div class="col">
+      <img src="images/innovation.png" alt="Innovation Icon">
+      <h2>Innovation</h2>
+      <p>Intel drives sustainable innovation with efficient technology.</p>
+      <button>Learn More</button>
     </div>
-    <div class="card">
-      <img src="2.jpg" alt="1971 – First Microprocessor 4004">
-      <p>1971 – First Microprocessor 4004</p>
-      <button>Read More</button>
+    <div class="col">
+      <img src="images/planet.png" alt="Planet Icon">
+      <h2>Environment</h2>
+      <p>We prioritize environmental responsibility across our processes.</p>
+      <button>Learn More</button>
     </div>
-    <div class="card">
-      <img src="3.jpg" alt="1978 – 8086 Processor">
-      <p>1978 – 8086 Processor</p>
-      <button>Read More</button>
+    <div class="col">
+      <img src="images/community.png" alt="Community Icon">
+      <h2>Community</h2>
+      <p>Our mission is to support communities globally with technology.</p>
+      <button>Learn More</button>
     </div>
-    <div class="card">
-      <img src="4.jpg" alt="1985 – Intel 386 Processor">
-      <p>1985 – Intel 386 Processor</p>
-      <button>Read More</button>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline">
+    <h2>Intel’s Sustainability Timeline</h2>
+    <div class="timeline-container">
+      <div class="timeline-card">
+        <img src="images/1.jpg" alt="Intel milestone 1970s">
+        <h3>1970s</h3>
+        <p class="hidden">Intel begins advancing microprocessor efficiency, reducing energy use.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/2.jpg" alt="Intel milestone 1980s">
+        <h3>1980s</h3>
+        <p class="hidden">Intel expands operations while adopting early sustainability practices.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/3.jpg" alt="Intel milestone 1990s">
+        <h3>1990s</h3>
+        <p class="hidden">Intel launches recycling and water conservation programs worldwide.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/4.jpg" alt="Intel milestone 2000s">
+        <h3>2000s</h3>
+        <p class="hidden">Intel increases renewable energy use and invests in green design.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/5.jpg" alt="Intel milestone 2010">
+        <h3>2010</h3>
+        <p class="hidden">Intel achieves new efficiency benchmarks in chip manufacturing.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/6.jpg" alt="Intel milestone 2015">
+        <h3>2015</h3>
+        <p class="hidden">Intel expands corporate social responsibility and clean energy goals.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/7.jpg" alt="Intel milestone 2018">
+        <h3>2018</h3>
+        <p class="hidden">Intel becomes a recognized leader in sustainability rankings.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/8.jpg" alt="Intel milestone 2020">
+        <h3>2020</h3>
+        <p class="hidden">Intel commits to 100% renewable electricity use globally.</p>
+      </div>
+      <div class="timeline-card">
+        <img src="images/9.jpg" alt="Intel milestone 2022-present">
+        <h3>2022–Present</h3>
+        <p class="hidden">Intel pledges net-zero greenhouse gas emissions by 2040.</p>
+      </div>
     </div>
-    <div class="card">
-      <img src="5.jpg" alt="1993 – Pentium Processor">
-      <p>1993 – Pentium Processor</p>
-      <button>Read More</button>
-    </div>
-    <div class="card">
-      <img src="6.jpg" alt="2006 – Core 2 Duo">
-      <p>2006 – Core 2 Duo</p>
-      <button>Read More</button>
-    </div>
-    <div class="card">
-      <img src="7.jpg" alt="2020 – 10th Gen Intel Core">
-      <p>2020 – 10th Gen Intel Core</p>
-      <button>Read More</button>
-    </div>
-    <div class="card">
-      <img src="8.jpg" alt="2022 – Intel ARC GPUs">
-      <p>2022 – Intel ARC GPUs</p>
-      <button>Read More</button>
-    </div>
-    <div class="card">
-      <img src="9.jpg" alt="2024 – AI and Sustainability">
-      <p>2024 – AI and Sustainability</p>
-      <button>Read More</button>
-    </div>
-  </main>
+  </section>
 
   <!-- Subscription Form -->
   <section class="subscribe">
-    <h2 data-en="Subscribe to Sustainability Updates"
-        data-ar="اشترك في تحديثات الاستدامة">Subscribe to Sustainability Updates</h2>
+    <h2>Stay Updated</h2>
     <form>
-      <input type="email" placeholder="Enter your email" aria-label="Email" required>
-      <button type="submit" data-en="Subscribe" data-ar="اشترك">Subscribe</button>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required aria-label="Email Address">
+      <button type="submit">Subscribe</button>
     </form>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Intel Sustainability Project</p>
+    <p>&copy; 2025 Intel Sustainability Project | Designed by Yusra</p>
   </footer>
 
-  <!-- Rubric -->
-  <section class="rubric">
-    <h2>Project Rubric (English / العربية)</h2>
-    <table>
-      <tr><th>Criteria</th><th>Meets Expectations</th><th>المعايير</th><th>يلبي التوقعات</th></tr>
-      <tr><td>RTL Layout</td><td>Implemented with dir="rtl"</td><td>التخطيط من اليمين لليسار</td><td>تم تنفيذه</td></tr>
-      <tr><td>Responsive Grid</td><td>Three-column Bootstrap grid</td><td>شبكة متجاوبة</td><td>شبكة بثلاثة أعمدة</td></tr>
-      <tr><td>Form + Footer</td><td>Newsletter & footer added</td><td>النموذج والتذييل</td><td>تمت إضافتهما</td></tr>
-      <tr><td>Accessibility</td><td>Alt text, labels, contrast</td><td>إمكانية الوصول</td><td>نص بديل، تسميات</td></tr>
-      <tr><td>Reflections</td><td>Included bilingual reflections</td><td>التأملات</td><td>مدمجة باللغتين</td></tr>
-    </table>
-  </section>
-
+  <!-- Script for RTL toggle & card interactivity -->
   <script>
-    function setLang(lang) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-      document.querySelectorAll('[data-en]').forEach(el=>{
-        el.textContent = lang==='ar'? el.dataset.ar : el.dataset.en;
+    // RTL toggle
+    document.getElementById('rtl-toggle').addEventListener('click', () => {
+      document.body.dir = (document.body.dir === 'ltr') ? 'rtl' : 'ltr';
+    });
+
+    // Timeline card reveal on click
+    document.querySelectorAll('.timeline-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.querySelector('p').classList.toggle('hidden');
       });
-    }
+    });
   </script>
+
 </body>
 </html>
