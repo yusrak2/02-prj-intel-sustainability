@@ -1,0 +1,204 @@
+/* Lavender theme stylesheet (duplicate of style.css lavender rules) */
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Lavender color system */
+:root {
+  --lav-50: #fbf8ff; /* very pale */
+  --lav-100: #f3ecff;
+  --lav-200: #e6dbff;
+  --lav-400: #a78bfa;
+  --lav-500: #7c3aed; /* primary lavender */
+  --lav-600: #6d28d9;
+  --lav-700: #5b21b6;
+  --accent: var(--lav-500);
+  --accent-dark: var(--lav-600);
+  --muted: #6b5b7a;
+  --bg: #fbf8ff; /* page background */
+  --surface: #ffffff;
+  --panel: #f7f3ff;
+  --text: #241b2b;
+  --shadow: rgba(36,27,43,0.06);
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, var(--lav-100), var(--lav-200));
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+header h1 { color: var(--lav-700); }
+header button {
+  background: var(--surface);
+  color: var(--accent);
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+header button:hover {
+  background: var(--panel);
+}
+
+/* Three Columns */
+.three-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
+  background: transparent;
+}
+.col {
+  flex: 1 1 250px;
+  max-width: 300px;
+  margin: 1rem;
+  text-align: center;
+  background: var(--surface);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--shadow);
+  transition: transform 0.3s;
+}
+.col:hover {
+  transform: scale(1.05);
+}
+.col img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  background: transparent;
+}
+.col button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.col button:hover {
+  background: var(--accent-dark);
+}
+
+/* Timeline */
+.timeline {
+  padding: 2rem;
+  background: transparent;
+}
+.timeline h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Desktop: grid */
+.timeline-container {
+  /* Horizontal sliding row for timeline cards */
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem; /* space for scrollbar */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.timeline-card {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px var(--shadow);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  flex: 0 0 280px; /* fixed card width so sliding works */
+  scroll-snap-align: start;
+}
+.timeline-card:hover {
+  transform: translateY(-5px);
+}
+.timeline-card img {
+  width: 100%;
+  height: 160px; /* fixed height so all images match */
+  object-fit: cover; /* crop but keep aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.timeline-card .hidden {
+  display: none;
+}
+
+/* Custom scrollbar for timeline sliding row */
+.timeline-container::-webkit-scrollbar {
+  height: 10px;
+}
+.timeline-container::-webkit-scrollbar-track {
+  background: var(--lav-50);
+  border-radius: 10px;
+}
+.timeline-container::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+.timeline-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--lav-50);
+}
+
+/* Mobile: horizontal scroll */
+@media (max-width: 768px) {
+  .timeline-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+  .timeline-card {
+    min-width: 250px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Subscription */
+.subscribe {
+  background: var(--surface);
+  padding: 2rem;
+  text-align: center;
+}
+.subscribe form {
+  display: inline-block;
+  margin-top: 1rem;
+}
+.subscribe input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.subscribe button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.subscribe button:hover {
+  background: var(--accent-dark);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(90deg, var(--lav-100), var(--lav-200));
+  color: var(--lav-700);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Build timestamp: 2025-09-21T00:00:00Z - trigger Pages rebuild */
