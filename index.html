@@ -150,3 +150,44 @@
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
 </body>
 </html>
+<html lang="ar" dir="rtl">
+<h1 class="text-end">الاستدامة عبر العصور</h1>
+<div class="container text-center my-5">
+  <div class="row">
+    <div class="col-md-4">
+      <img src="assets/cpu1985.jpg" alt="معالج 386" class="img-fluid rounded shadow">
+      <p>1985 – معالج 386</p>
+      <button class="btn btn-primary">إقرأ أكثر</button>
+    </div>
+    <div class="col-md-4">
+      <img src="assets/cpu1978.jpg" alt="معالج 8086" class="img-fluid rounded shadow">
+      <p>1978 – معالج 8086</p>
+      <button class="btn btn-primary">إقرأ أكثر</button>
+    </div>
+    <div class="col-md-4">
+      <img src="assets/intel1968.jpg" alt="تأسست شركة إنتل" class="img-fluid rounded shadow">
+      <p>1968 – تأسست شركة إنتل</p>
+      <button class="btn btn-primary">إقرأ أكثر</button>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <form class="p-4 border rounded bg-light">
+    <h4 class="mb-3">اشترك في نشرتنا الإخبارية للاستدامة</h4>
+    <div class="mb-3">
+      <label for="email" class="form-label">البريد الإلكتروني</label>
+      <input type="email" id="email" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+    </div>
+    <button type="submit" class="btn btn-success">اشترك</button>
+  </form>
+</div>
+
+<footer class="text-center py-4 bg-dark text-light mt-5">
+  <p>© 2025 Intel Sustainability Project</p>
+</footer>
+<script>
+  if (navigator.language.startsWith('ar')) {
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+  }
+</script>
