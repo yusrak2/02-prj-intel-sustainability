@@ -31,15 +31,15 @@
   <section class="three-columns container">
     <div class="row">
       <div class="col-12 col-md-4">
-        <div class="col">
-          <img src="img/innovation.jpg" alt="Innovation Icon">
-          <h2>Innovation</h2>
-          <p>Intel drives sustainable innovation with efficient technology.</p>
-          <button>Learn More</button>
-        </div>
+          <div class="col" data-index="0">
+            <img src="img/innovation.jpg" alt="Innovation Icon">
+            <h2>Innovation</h2>
+            <p>Intel drives sustainable innovation with efficient technology.</p>
+            <button>Learn More</button>
+          </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="col">
+        <div class="col" data-index="1">
           <img src="img/environment.jpg" alt="Planet Icon">
           <h2>Environment</h2>
           <p>We prioritize environmental responsibility across our processes.</p>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="col">
+        <div class="col" data-index="2">
           <img src="img/community.jpg" alt="Community Icon">
           <h2>Community</h2>
           <p>Our mission is to support communities globally with technology.</p>
@@ -217,7 +217,12 @@
         else localStorage.removeItem('dirOverride');
       }
 
+      // track current language for modal/localization handlers
+      let currentLang = 'en';
+
       function applyTranslations(langKey) {
+        // update current language tracker
+        currentLang = langKey;
         const dict = translations[langKey] || translations.en;
         const isRtlLang = ['ar','he','fa','ur'].includes(langKey);
         document.documentElement.lang = langKey;
@@ -241,6 +246,20 @@
           if (para && dict.cols[i]) para.textContent = dict.cols[i].text;
           if (btn) btn.textContent = dict.learnMore;
         });
+          // update three-column cards (title, paragraph, button)
+          const threeCols = document.querySelectorAll('.three-columns .col[data-index]');
+          threeCols.forEach(col => {
+            const idx = Number(col.getAttribute('data-index'));
+            const data = (dict.cols && dict.cols[idx]) || { title: '', text: '', button: '' };
+            const h2 = col.querySelector('h2');
+            const p = col.querySelector('p');
+            const btn = col.querySelector('button');
+            if (h2) h2.textContent = data.title || '';
+            if (p) p.textContent = data.text || '';
+            if (btn) btn.textContent = data.button || '';
+            // ensure button has data-index for modal
+            if (btn) btn.setAttribute('data-index', idx);
+          });
 
         const timelineHeading = document.querySelector('.timeline h2');
         if (timelineHeading) timelineHeading.textContent = dict.timelineHeading;
@@ -342,30 +361,35 @@
         });
       });
 
-      // Bootstrap modal: wire "Learn More" buttons to show modal with context
+      // Bootstrap modal: wire "Learn More" buttons to show modal with localized content
       const learnButtons = document.querySelectorAll('.three-columns .col button');
       const modalEl = document.getElementById('learnMoreModal');
       const bsModal = modalEl ? new bootstrap.Modal(modalEl) : null;
       const modalTitle = modalEl ? modalEl.querySelector('.modal-title') : null;
       const modalBody = modalEl ? modalEl.querySelector('.modal-body') : null;
-      const details = {
-        'Innovation': 'Intel drives sustainable innovation with efficient technology. We invest in research to lower power consumption and increase compute efficiency.',
-        'Environment': 'Intel prioritizes environmental responsibility: energy efficiency, water reduction, and circular design are central to our strategy.',
-        'Community': 'Intel supports communities globally with programs for education, workforce development, and inclusive tech access.'
-      };
       learnButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-          const col = e.target.closest('.col');
-          const title = col ? (col.querySelector('h2') ? col.querySelector('h2').textContent : 'Details') : 'Details';
-          if (modalTitle) modalTitle.textContent = title;
-          if (modalBody) modalBody.textContent = details[title] || '';
+          const colEl = e.target.closest('.col');
+          const idx = colEl ? Number(colEl.getAttribute('data-index')) : null;
+          const dict = translations[currentLang] || translations.en;
+          let title = 'Details', bodyText = '';
+          if (idx !== null && dict.cols && dict.cols[idx]) {
+            title = dict.cols[idx].title || title;
+            bodyText = dict.cols[idx].text || '';
+          } else if (colEl) {
+            title = colEl.querySelector('h2') ? colEl.querySelector('h2').textContent : title;
+            bodyText = colEl.querySelector('p') ? colEl.querySelector('p').textContent : '';
+          }
+          if (modalTitle) {
+            modalTitle.textContent = title;
+            modalTitle.setAttribute('data-index', idx !== null ? idx : '');
+          }
+          if (modalBody) modalBody.textContent = bodyText;
           if (bsModal) bsModal.show();
         });
       });
     })();
   </script>
-</body>
-</script>
   <!-- Bootstrap JS (bundle includes Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
