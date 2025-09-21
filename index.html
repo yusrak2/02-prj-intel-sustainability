@@ -155,7 +155,18 @@
             {title: 'Community', text: 'Our mission is to support communities globally with technology.'}
           ],
           learnMore: 'Learn More',
-          timelineHeading: 'Intel’s Sustainability Timeline',
+            timelineHeading: 'Intel’s Sustainability Timeline',
+            timeline: [
+              'Robert Noyce and Gordon Moore rename NM Electronics to Intel Corporation, laying the foundation for decades of innovation.',
+              "Intel debuts the 4004, the world's first commercial microprocessor.",
+              'Launch of the 8086 processor, establishing the x86 architecture.',
+              'Intel introduces the 386 processor with 32-bit architecture.',
+              'Intel expands consumer and enterprise microprocessor offerings.',
+              'Peak GHG emissions year and start of major sustainability investments.',
+              'Intel launches the RISE strategy and 2030 goals.',
+              'Intel commits to net-zero greenhouse gas emissions by 2040.',
+              'Intel hosts the Sustainability Summit to drive collaboration across partners.'
+            ],
           subscribeHeading: 'Stay Updated',
           emailLabel: 'Email Address',
           subscribeButton: 'Subscribe',
@@ -172,6 +183,17 @@
           learnMore: 'Más información',
           timelineHeading: 'Cronología de Sostenibilidad de Intel',
           subscribeHeading: 'Mantente informado',
+            timeline: [
+              'Robert Noyce y Gordon Moore renombran NM Electronics a Intel Corporation, sentando las bases para décadas de innovación.',
+              'Intel presenta el 4004, el primer microprocesador comercial del mundo.',
+              'Lanzamiento del procesador 8086, estableciendo la arquitectura x86.',
+              'Intel introduce el 386 con arquitectura de 32 bits.',
+              'Intel amplía su oferta de microprocesadores para consumidores y empresas.',
+              'Año de emisiones de GEI máximo y comienzo de grandes inversiones en sostenibilidad.',
+              'Intel lanza la estrategia RISE y objetivos para 2030.',
+              'Intel se compromete a emisiones netas cero de gases de efecto invernadero para 2040.',
+              'Intel organiza la Cumbre de Sostenibilidad para impulsar la colaboración entre socios.'
+            ],
           emailLabel: 'Dirección de correo',
           subscribeButton: 'Suscribirse',
           footer: '© 2025 Proyecto de Sostenibilidad de Intel | Diseñado por Yusra'
@@ -187,6 +209,17 @@
           learnMore: 'En savoir plus',
           timelineHeading: 'Chronologie de la durabilité d\'Intel',
           subscribeHeading: 'Restez informé',
+            timeline: [
+              'Robert Noyce et Gordon Moore renomment NM Electronics en Intel Corporation, posant les bases de décennies d\'innovation.',
+              'Intel dévoile le 4004, le premier microprocesseur commercial au monde.',
+              'Lancement du processeur 8086, établissant l\'architecture x86.',
+              'Intel introduit le 386 avec une architecture 32 bits.',
+              'Intel étend son offre de microprocesseurs grand public et entreprise.',
+              'Année de pointe des émissions de GES et début d\'importants investissements en durabilité.',
+              'Intel lance la stratégie RISE et les objectifs 2030.',
+              'Intel s\'engage à atteindre des émissions nettes de gaz à effet de serre nulles d\'ici 2040.',
+              'Intel organise le Sommet sur la durabilité pour favoriser la collaboration entre partenaires.'
+            ],
           emailLabel: 'Adresse e-mail',
           subscribeButton: 'S\'abonner',
           footer: '© 2025 Projet de durabilité Intel | Conçu par Yusra'
@@ -202,6 +235,17 @@
           learnMore: 'المزيد',
           timelineHeading: 'المحور الزمني لاستدامة إنتل',
           subscribeHeading: 'ابقَ على اطلاع',
+            timeline: [
+              'يعيد روبرت نويس وغوردون مور تسمية NM Electronics إلى Intel Corporation، مُمهِّدين الطريق لعقود من الابتكار.',
+              'تُقدّم إنتل 4004، أوّل ميكروبروسيسور تجاري في العالم.',
+              'إطلاق المعالج 8086، مما أرسى معمارية x86.',
+              'تُقدّم إنتل 386 بمعمارية 32 بت.',
+              'توسّع إنتل عروض المعالجات للمستهلكين والشركات.',
+              'عام الذروة في انبعاثات غازات الدفيئة وبداية استثمارات كبيرة في الاستدامة.',
+              'تطلق إنتل استراتيجية RISE وأهداف 2030.',
+              'تلتزم إنتل بتحقيق صافي انبعاثات غازات دفيئة صفرية بحلول 2040.',
+              'تستضيف إنتل قمة الاستدامة لتعزيز التعاون بين الشركاء.'
+            ],
           emailLabel: 'البريد الإلكتروني',
           subscribeButton: 'اشترك',
           footer: '© 2025 مشروع استدامة إنتل | التصميم: يسرى'
@@ -263,6 +307,14 @@
 
         const timelineHeading = document.querySelector('.timeline h2');
         if (timelineHeading) timelineHeading.textContent = dict.timelineHeading;
+
+        // update timeline card paragraphs if translations present
+        const tl = dict.timeline || [];
+        const timelineCards = document.querySelectorAll('.timeline-card');
+        timelineCards.forEach((card, i) => {
+          const p = card.querySelector('p');
+          if (p) p.textContent = tl[i] || p.textContent;
+        });
 
         const subscribeHeading = document.querySelector('.subscribe h2');
         if (subscribeHeading) subscribeHeading.textContent = dict.subscribeHeading;
