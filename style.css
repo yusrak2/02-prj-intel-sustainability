@@ -1,89 +1,18 @@
-/* Reset & Base Styles */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f9f9ff; /* very light lavender background */
-  color: #2d2d2d;
-  line-height: 1.6;
-}
-
-/* Hero Section */
-header {
-  background: linear-gradient(to right, #b39ddb, #81d4fa); 
-  /* lavender → light blue */
-  color: white;
-  text-align: center;
-  padding: 3rem 1rem;
-  position: relative;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-}
-
-header img {
-  width: 120px; 
-  margin-bottom: 1rem;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-header p {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  line-height: 1.6;
-}
-
-/* Timeline Section */
-section {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 1rem;
-  padding: 2rem 1rem;
-}
-
-section > div {
-  flex: 0 0 300px;
-  background: white;
-  border-radius: 16px;
-  padding: 1.5rem;
-  border: 2px solid #e1bee7; /* light lavender border */
-  box-shadow: 0 4px 10px rgba(179, 157, 219, 0.3); /* lavender shadow */
-  scroll-snap-align: start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-section > div h2 {
-  color: #7e57c2; /* deep lavender for years */
-}
-
-section > div h3 {
-  color: #0288d1; /* stronger light blue for milestone titles */
-}
-
-section > div:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 8px 20px rgba(128, 222, 234, 0.4); /* glowing blue hover */
-}
-
-/* Hover to reveal more text */
-section > div p {
-  max-height: 60px;
-  overflow: hidden;
-  transition: max-height 0.4s ease-in-out;
-}
-
-section > div:hover p {
-  max-height: 300px;
-}
-
-/* Mobile Friendly */
-@media (max-width: 768px) {
-  section {
-    flex-direction: column;
-    overflow-x: visible;
-  }
-}
+body{font-family:sans-serif;margin:0;line-height:1.6}
+.lang-toggle{text-align:center;padding:1em;background:#f0f0f0}
+.lang-toggle button{margin:0 .5em;padding:.5em 1em;border:none;border-radius:6px;cursor:pointer}
+.hero{text-align:center;padding:2em;background:#dce9f9}
+.hero h1{margin-bottom:.5em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1em;padding:2em}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.1);padding:1em;text-align:center}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:.5em}
+.card button{margin-top:.5em;padding:.5em 1em;border:none;background:#0071c5;color:#fff;border-radius:6px;cursor:pointer}
+.subscribe{text-align:center;padding:2em;background:#eef6ed}
+.subscribe form{display:flex;justify-content:center;gap:.5em;flex-wrap:wrap}
+.subscribe input{padding:.5em;width:250px;max-width:100%;border:1px solid #ccc;border-radius:6px}
+.subscribe button{padding:.5em 1em;background:#28a745;color:#fff;border:none;border-radius:6px;cursor:pointer}
+footer{text-align:center;padding:1em;background:#222;color:#fff}
+.rubric{padding:2em}
+.rubric table{width:100%;border-collapse:collapse}
+.rubric th,.rubric td{border:1px solid #ccc;padding:.5em;text-align:center}
+.rubric th{background:#f8f8f8}
