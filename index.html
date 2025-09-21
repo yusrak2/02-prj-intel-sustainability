@@ -11,7 +11,16 @@
   <!-- Header with RTL Toggle -->
   <header>
     <h1>Intel Sustainability & Localization Project</h1>
-    <button id="rtl-toggle">Toggle RTL</button>
+    <div class="header-controls">
+      <button id="rtl-toggle">Toggle RTL</button>
+      <label for="lang-select" class="visually-hidden">Language</label>
+      <select id="lang-select" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
   </header>
 
   <!-- Three Column Section -->
@@ -103,9 +112,8 @@
     <p>&copy; 2025 Intel Sustainability Project | Designed by Yusra</p>
   </footer>
 
-  <!-- Script for RTL toggle & card interactivity -->
+  <!-- Combined script: i18n, manual language switcher, RTL toggle, and timeline interactivity -->
   <script>
-    // Auto-detect browser language and apply translations + direction
     (function() {
       const translations = {
         en: {
@@ -170,24 +178,17 @@
         }
       };
 
-      const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      const langKey = browserLang.split('-')[0];
-      const isRtl = ['ar', 'he', 'fa', 'ur'].includes(langKey);
-      const dict = translations[langKey] || translations.en;
+      function applyTranslations(langKey) {
+        const dict = translations[langKey] || translations.en;
+        const isRtl = ['ar','he','fa','ur'].includes(langKey);
+        document.documentElement.lang = langKey;
+        document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
 
-      // Set html lang and dir
-      document.documentElement.lang = langKey;
-      document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
-
-      // Apply translations safely
-      try {
         const header = document.querySelector('header h1');
         if (header) header.textContent = dict.headerTitle;
-
         const rtlBtn = document.getElementById('rtl-toggle');
         if (rtlBtn) rtlBtn.textContent = dict.rtlButton;
 
-        // three columns
         const cols = document.querySelectorAll('.three-columns .col');
         cols.forEach((col, i) => {
           const title = col.querySelector('h2');
@@ -210,24 +211,44 @@
 
         const footerP = document.querySelector('footer p');
         if (footerP) footerP.textContent = dict.footer;
-      } catch (e) {
-        // harmless fallback; if DOM not ready or selectors fail, nothing breaks
-        console.warn('i18n apply error', e);
-      }
-    })();
-  </script>
-  <script>
-    // RTL toggle
-    document.getElementById('rtl-toggle').addEventListener('click', () => {
-      document.body.dir = (document.body.dir === 'ltr') ? 'rtl' : 'ltr';
-    });
 
-    // Timeline card reveal on click
-    document.querySelectorAll('.timeline-card').forEach(card => {
-      card.addEventListener('click', () => {
-        card.querySelector('p').classList.toggle('hidden');
+        // update select value if present
+        const select = document.getElementById('lang-select');
+        if (select) select.value = langKey;
+      }
+
+      // Determine initial language (localStorage -> browser -> en)
+      const stored = localStorage.getItem('siteLang');
+      const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      const initial = stored || browserLang.split('-')[0] || 'en';
+      applyTranslations(initial);
+
+      // Hook the language selector
+      const langSelect = document.getElementById('lang-select');
+      if (langSelect) {
+        langSelect.addEventListener('change', (e) => {
+          const v = e.target.value;
+          localStorage.setItem('siteLang', v);
+          applyTranslations(v);
+        });
+      }
+
+      // RTL toggle (keeps manual control)
+      const rtlBtnEl = document.getElementById('rtl-toggle');
+      if (rtlBtnEl) {
+        rtlBtnEl.addEventListener('click', () => {
+          document.body.dir = (document.body.dir === 'ltr') ? 'rtl' : 'ltr';
+        });
+      }
+
+      // Timeline card reveal on click
+      document.querySelectorAll('.timeline-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const p = card.querySelector('p');
+          if (p) p.classList.toggle('hidden');
+        });
       });
-    });
+    })();
   </script>
 
 </body>
