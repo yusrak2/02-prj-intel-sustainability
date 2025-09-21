@@ -20,7 +20,9 @@
         <option value="fr">Français</option>
         <option value="ar">العربية</option>
       </select>
+      <button id="reset-lang" class="reset-lang">Reset language</button>
     </div>
+    <div id="lang-indicator" class="lang-indicator" aria-live="polite" hidden></div>
   </header>
 
   <!-- Three Column Section -->
@@ -219,8 +221,8 @@
 
       // Determine initial language (localStorage -> navigator.languages -> navigator.language -> en)
       const supported = ['en','es','fr','ar'];
-      const stored = localStorage.getItem('siteLang');
-      function pickFromBrowser() {
+  const stored = localStorage.getItem('siteLang');
+  function pickFromBrowser() {
         // navigator.languages (array) preferred when available
         const langs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || 'en'];
         for (let l of langs) {
@@ -234,6 +236,20 @@
       const initial = stored || browserChoice || 'en';
       applyTranslations(initial);
 
+      // Show an indicator if the language was auto-detected (not set in localStorage)
+      const langIndicatorEl = document.getElementById('lang-indicator');
+      const isAuto = !stored && browserChoice;
+      if (langIndicatorEl) {
+        if (isAuto) {
+          langIndicatorEl.hidden = false;
+          const names = {en:'English', es:'Español', fr:'Français', ar:'العربية'};
+          langIndicatorEl.textContent = `Detected language: ${names[initial] || initial}`;
+          setTimeout(() => { if (langIndicatorEl) langIndicatorEl.hidden = true; }, 5000);
+        } else {
+          langIndicatorEl.hidden = true;
+        }
+      }
+
       // Hook the language selector
       const langSelect = document.getElementById('lang-select');
       if (langSelect) {
@@ -241,6 +257,26 @@
           const v = e.target.value;
           localStorage.setItem('siteLang', v);
           applyTranslations(v);
+          // hide indicator when user manually picks
+          const li = document.getElementById('lang-indicator'); if (li) li.hidden = true;
+        });
+      }
+
+      // Reset language preference button
+      const resetBtn = document.getElementById('reset-lang');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          localStorage.removeItem('siteLang');
+          // re-run detection
+          const newChoice = pickFromBrowser() || 'en';
+          applyTranslations(newChoice);
+          const li = document.getElementById('lang-indicator');
+          if (li) {
+            li.hidden = false;
+            const names = {en:'English', es:'Español', fr:'Français', ar:'العربية'};
+            li.textContent = `Detected language: ${names[newChoice] || newChoice}`;
+            setTimeout(() => { if (li) li.hidden = true; }, 5000);
+          }
         });
       }
 

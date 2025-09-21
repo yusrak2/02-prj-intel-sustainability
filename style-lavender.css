@@ -202,3 +202,22 @@ footer {
 }
 
 /* Build timestamp: 2025-09-21T00:00:00Z - trigger Pages rebuild */
+
+/* Language indicator and reset */
+.header-controls { display: flex; gap: 0.5rem; align-items: center; justify-content:center; }
+.reset-lang {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.reset-lang:hover { background: var(--panel); }
+.lang-indicator {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding: 0.25rem 0.5rem;
+}
