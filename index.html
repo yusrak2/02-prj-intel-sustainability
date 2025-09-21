@@ -217,10 +217,21 @@
         if (select) select.value = langKey;
       }
 
-      // Determine initial language (localStorage -> browser -> en)
+      // Determine initial language (localStorage -> navigator.languages -> navigator.language -> en)
+      const supported = ['en','es','fr','ar'];
       const stored = localStorage.getItem('siteLang');
-      const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      const initial = stored || browserLang.split('-')[0] || 'en';
+      function pickFromBrowser() {
+        // navigator.languages (array) preferred when available
+        const langs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || 'en'];
+        for (let l of langs) {
+          if (!l) continue;
+          const key = l.toLowerCase().split('-')[0];
+          if (supported.includes(key)) return key;
+        }
+        return null;
+      }
+      const browserChoice = pickFromBrowser();
+      const initial = stored || browserChoice || 'en';
       applyTranslations(initial);
 
       // Hook the language selector
