@@ -300,7 +300,8 @@
             const btn = col.querySelector('button');
             if (h2) h2.textContent = data.title || '';
             if (p) p.textContent = data.text || '';
-            if (btn) btn.textContent = data.button || '';
+            // prefer per-card button label, otherwise fall back to dict.learnMore
+            if (btn) btn.textContent = (data.button && data.button.length) ? data.button : (dict.learnMore || 'Learn More');
             // ensure button has data-index for modal
             if (btn) btn.setAttribute('data-index', idx);
           });
