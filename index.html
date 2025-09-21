@@ -180,11 +180,24 @@
         }
       };
 
+      // Direction override helpers: allow user to persist a manual dir choice
+      function getDirOverride() {
+        return localStorage.getItem('dirOverride');
+      }
+      function setDirOverride(val) {
+        if (val) localStorage.setItem('dirOverride', val);
+        else localStorage.removeItem('dirOverride');
+      }
+
       function applyTranslations(langKey) {
         const dict = translations[langKey] || translations.en;
-        const isRtl = ['ar','he','fa','ur'].includes(langKey);
+        const isRtlLang = ['ar','he','fa','ur'].includes(langKey);
         document.documentElement.lang = langKey;
-        document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+        // prefer an explicit user override for direction
+        const override = getDirOverride();
+        const finalDir = override || (isRtlLang ? 'rtl' : 'ltr');
+        document.documentElement.dir = finalDir;
+        document.body.dir = finalDir;
 
         const header = document.querySelector('header h1');
         if (header) header.textContent = dict.headerTitle;
@@ -262,11 +275,12 @@
         });
       }
 
-      // Reset language preference button
+      // Reset language preference button (also clears any dir override so auto-detect resumes)
       const resetBtn = document.getElementById('reset-lang');
       if (resetBtn) {
         resetBtn.addEventListener('click', () => {
           localStorage.removeItem('siteLang');
+          setDirOverride(null);
           // re-run detection
           const newChoice = pickFromBrowser() || 'en';
           applyTranslations(newChoice);
@@ -280,11 +294,15 @@
         });
       }
 
-      // RTL toggle (keeps manual control)
+      // RTL toggle (saves manual override)
       const rtlBtnEl = document.getElementById('rtl-toggle');
       if (rtlBtnEl) {
         rtlBtnEl.addEventListener('click', () => {
-          document.body.dir = (document.body.dir === 'ltr') ? 'rtl' : 'ltr';
+          const current = document.documentElement.dir || document.body.dir || 'ltr';
+          const next = (current === 'ltr') ? 'rtl' : 'ltr';
+          setDirOverride(next);
+          document.documentElement.dir = next;
+          document.body.dir = next;
         });
       }
 
